@@ -4,7 +4,7 @@
 import os
 from subprocess import getstatusoutput, getoutput
 
-prg = './crowsnest.py'
+prg = 'crowsnest.py'
 consonant_words = [
     'brigantine', 'clipper', 'dreadnought', 'frigate', 'galleon', 'haddock',
     'junk', 'ketch', 'longboat', 'mullet', 'narwhal', 'porpoise', 'quay',
@@ -27,7 +27,7 @@ def test_usage():
     """usage"""
 
     for flag in ['-h', '--help']:
-        rv, out = getstatusoutput(f'{prg} {flag}')
+        rv, out = getstatusoutput(f'python {prg} {flag}')
         assert rv == 0
         assert out.lower().startswith('usage')
 
@@ -37,7 +37,7 @@ def test_consonant():
     """brigantine -> a brigantine"""
 
     for word in consonant_words:
-        out = getoutput(f'{prg} {word}')
+        out = getoutput(f'python {prg} {word}')
         assert out.strip() == template.format('a', word)
 
 
@@ -46,7 +46,7 @@ def test_consonant_upper():
     """brigantine -> a Brigatine"""
 
     for word in consonant_words:
-        out = getoutput(f'{prg} {word.title()}')
+        out = getoutput(f'python {prg} {word.title()}')
         assert out.strip() == template.format('a', word.title())
 
 
@@ -55,7 +55,7 @@ def test_vowel():
     """octopus -> an octopus"""
 
     for word in vowel_words:
-        out = getoutput(f'{prg} {word}')
+        out = getoutput(f'python {prg} {word}')
         assert out.strip() == template.format('an', word)
 
 
@@ -64,5 +64,5 @@ def test_vowel_upper():
     """octopus -> an Octopus"""
 
     for word in vowel_words:
-        out = getoutput(f'{prg} {word.upper()}')
+        out = getoutput(f'python {prg} {word.upper()}')
         assert out.strip() == template.format('an', word.upper())
